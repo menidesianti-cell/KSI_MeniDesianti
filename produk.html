@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Produk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone">
+<div class="header">Produk</div>
+
+<div class="horizontal">
+
+    <div class="card">
+        <img src="bergo.jpg" class="product-img">
+        <h4>Naima Bergo</h4>
+        <p>Hijab siap pakai berbahan lembut dan ringan, nyaman digunakan untuk aktivitas sehari-hari </p>
+        <h3>30000</h3>
+        <button class="btn" onclick="tambahKeranjang('Hijab Bergo',29000)">Tambah</button>
+    </div>
+
+    <div class="card">
+        <img src="silk.jpg" class="product-img">
+        <h4>Amirah Silk</h4>
+        <p>Hijab dengan tekstur halus dan flowy,memberikan kesan mewah dan elegan. </p>
+        <h3>40000</h3>
+        <button class="btn" onclick="tambahKeranjang('Hijab Voal',35000)">Tambah</button>
+    </div>
+
+    <div class="card">
+        <img src="segi4.jpg" class="product-img">
+        <h4>Yasmin Square</h4>
+        <p>Hijab segi empat dengan bahan lembut dan tidak licin,cocok untuk berbagai gaya busana.</p>
+        <h3>35000</h3>
+        <button class="btn" onclick="tambahKeranjang('Hijab Voal',35000)">Tambah</button>
+    </div>
+
+    <div class="card">
+        <img src="voal.jpg" class="product-img">
+        <h4>Khanza Voal</h4>
+        <p>Hijab voal dengan bahan halus,ringan,dan mudah dibentuk,memberikan tampilan rapi dan elegan.</p>
+        <h3>45000</h3>
+        <button class="btn" onclick="tambahKeranjang('Hijab Voal',35000)">Tambah</button>
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+    <a href="index.html">Beranda</a>
+    <a class="active">Produk</a>
+    <a href="kategori.html">Kategori</a>
+    <a href="keranjang.html">Keranjang</a>
+    <a href="bayar.html">Bayar</a>
+</nav>
+</div>
+
+<script>
+function tambahKeranjang(nama, harga){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({nama, harga});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Produk ditambahkan ke keranjang");
+}
+</script>
+
+</body>
+</html>
+
+

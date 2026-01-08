@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pembayaran</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+}
+
+.phone{
+    max-width:420px;
+    margin:auto;
+    background:white;
+    min-height:100vh;
+    padding-bottom:80px;
+}
+
+.header{
+    background:#7a3e2e;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.card{
+    background:white;
+    margin:15px;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+label{
+    font-weight:bold;
+    display:block;
+    margin-bottom:5px;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+
+textarea{
+    resize:none;
+    height:80px;
+}
+
+.btn{
+    background:#2f8f83;
+    color:white;
+    border:none;
+    padding:12px;
+    width:100%;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.summary{
+    text-align:center;
+    font-weight:bold;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    max-width:420px;
+    display:flex;
+    background:white;
+    border-top:1px solid #ccc;
+}
+
+.bottom-nav a{
+    flex:1;
+    text-align:center;
+    padding:10px;
+    text-decoration:none;
+    color:gray;
+    font-size:14px;
+}
+
+.bottom-nav a.active{
+    color:#7a3e2e;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="header">Pembayaran</div>
+
+    <div class="card summary">
+        <div id="infoBarang"></div>
+    </div>
+
+    <div class="card">
+        <div class="form-group">
+            <label>Nama Pembeli</label>
+            <input type="text" id="nama" placeholder="Masukkan nama">
+        </div>
+
+        <div class="form-group">
+            <label>Alamat Pengiriman</label>
+            <textarea id="alamat" placeholder="Masukkan alamat lengkap"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Metode Pembayaran</label>
+            <select id="metode">
+                <option>COD</option>
+                <option>Transfer Bank</option>
+                <option>Paylater</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="konfirmasi()">Konfirmasi Pembayaran</button>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="kategori.html">Kategori</a>
+        <a href="cart.html">Keranjang</a>
+        <a href="bayar.html" class="active">Bayar</a>
+    </nav>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = 0;
+
+cart.forEach(item => total += item.harga);
+
+document.getElementById("infoBarang").innerHTML =
+    "Jumlah Barang: " + cart.length + "<br>Total Bayar: Rp " + total;
+
+function konfirmasi(){
+    let nama = document.getElementById("nama").value;
+    let alamat = document.getElementById("alamat").value;
+
+    if(nama === "" || alamat === ""){
+        alert("Nama dan alamat wajib diisi!");
+        return;
+    }
+
+    // hapus keranjang
+    localStorage.removeItem("cart");
+
+    // halaman terima kasih
+    document.querySelector(".phone").innerHTML = `
+        <div class="header">Terima Kasih</div>
+        <div class="card" style="text-align:center;">
+            <h3>Terima kasih telah berbelanja 🤍</h3>
+            <p>Pesanan atas nama <b>${nama}</b> sedang diproses.</p>
+            <p>Total pembayaran: <b>Rp ${total}</b></p>
+            <a href="index.html" class="btn">Kembali ke Beranda</a>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>

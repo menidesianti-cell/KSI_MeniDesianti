@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Keranjang</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone">
+<div class="header">Keranjang</div>
+
+<div id="listKeranjang"></div>
+
+<h4 id="total" style="text-align:center;"></h4>
+
+<a href="bayar.html" class="btn">Bayar Sekarang</a>
+
+<nav class="bottom-nav">
+    <a href="index.html">Beranda</a>
+    <a href="produk.html">Produk</a>
+    <a href="kategori.html">Kategori</a>
+    <a class="active">Keranjang</a>
+    <a href="bayar.html">Bayar</a>
+</nav>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let list = document.getElementById("listKeranjang");
+let total = 0;
+
+cart.forEach(item => {
+    total += item.harga;
+    list.innerHTML += `
+        <div class="card">
+            <h4>${item.nama}</h4>
+            <p>Rp ${item.harga}</p>
+        </div>
+    `;
+});
+
+document.getElementById("total").innerHTML = "Total: Rp " + total;
+</script>
+
+</body>
+</html>
